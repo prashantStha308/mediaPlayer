@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.list-element{
+    @apply text-xl text-blue-500
+}
