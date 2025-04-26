@@ -23,7 +23,7 @@ const SearchBar = ({ customWord , customSetter }) => {
         </button>
         
         {/* Decoration */}
-        <div className="opacity-0 group-focus-within:opacity-100 transition-all duration-150 ease-in absolute w-full h-full border-2 rounded-lg border-white blur-xs -z-10 " ></div>
+        <div className="opacity-0 group-focus-within:opacity-100 transition-all duration-150 ease-in absolute w-full h-full border-2 rounded-lg border-purple-500 blur-xs -z-10 " ></div>
     </section>
   )
 }

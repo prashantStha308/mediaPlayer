@@ -39,6 +39,10 @@ const musicSchema = mongoose.Schema({
     url:{
         type: String
     },
+    imgUrl:{
+        type: String,
+        default: ""
+    },
     timeCreated: {
         type: Date,
         default: Date.now()

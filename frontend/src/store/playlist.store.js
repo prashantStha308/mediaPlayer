@@ -4,6 +4,12 @@ import { getMusicById } from '../services/music.services';
 const PlaylistStore = create( set => ({
     playlist: [],
     setPlaylist: (playlist)=>{set({playlist})},
+    loadPlaylist: ( tracks = [] ) => {
+        set( state =>{
+            const uniqueTracks = tracks.filter( item => !state.playlist.some( playlistItem => playlistItem._id === item._id ) );
+            return { playlist: [...state.playlist , ...uniqueTracks] };
+        } );
+    },
     addMusicToPlaylist: async (id)=>{
         try {
             const res = await getMusicById(id);

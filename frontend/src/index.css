@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body{
-    @apply bg-gray-800 text-white dark:bg-gray-800;
+    @apply bg-gray-800 text-white dark:bg-gray-800 overflow-hidden;
 }
 
 button{
@@ -9,5 +9,83 @@ button{
 }
 
 .list-items{
+    @apply hover:text-purple-500 transition-all duration-100 ease-in-out  ;
+}
+.seek-slider{
+    accent-color: red;
+}
+
+
+/* index.css */
+
+@import "tailwindcss";
+
+body {
+    @apply bg-gray-800 text-white dark:bg-gray-800 overflow-hidden;
+}
+
+button {
+    @apply cursor-pointer;
+}
+
+.list-items {
     @apply hover:text-purple-500 transition-all duration-100 ease-in-out;
 }
+
+.seek-slider {
+    accent-color: red;
+}
+
+/* index.css */
+
+@import "tailwindcss";
+
+body {
+    @apply bg-gray-800 text-white dark:bg-gray-800 overflow-hidden;
+}
+
+button {
+    @apply cursor-pointer;
+}
+
+.list-items {
+    @apply hover:text-purple-500 transition-all duration-100 ease-in-out;
+}
+
+.seek-slider {
+    accent-color: red;
+}
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #6a7282  #1F2937; /* thumb color first, then track color */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #1F2937; /* Tailwind's gray-800 */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #6a7282 ; /* Tailwind's gray-400 */
+    border-radius: 10px;
+    border: 2px solid #1F2937; /* Match track for better look */
+}
+
+/* Explicitly remove scrollbar buttons (arrows) */
+.custom-scrollbar::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+
+/* Firefox scrollbar styling */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #6a7282  #1F2937; /* thumb color first, then track color */
+}
+

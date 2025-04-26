@@ -38,10 +38,10 @@ const Navbar = () => {
 	}, [isOpen]);
 
   return (
-    <header className="flex items-center justify-between px-4 py-2 bg-gray-900 border border-gray-700 rounded-md m-2 mt-1" >
+    <header className="flex items-center justify-between px-4 py-3 bg-gray-900 border border-gray-700 rounded-md mx-1 md:mx-2 mt-1 z-50" >
 		{/* Logo on left for larger devices only */}
 		<Link to={'/'} className="hidden lg:block" >
-			<img src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png" height={90} width={90} alt="logo" />
+			<img src="/logo.png" className="rounded-full" height={50} width={50} alt="logo" />
 		</Link>
 		{/* hamburger button */}
 		<button className="lg:hidden p-3 rounded-full hover:bg-gray-700 transition-all duration-150 ease-in " onClick={toggleNavbar} >
