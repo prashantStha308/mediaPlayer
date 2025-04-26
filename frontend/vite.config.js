@@ -14,8 +14,8 @@ export default defineConfig({
         target: 'http://localhost:5000',
         changeOrigin: true
       },
-      '/backend/storage': {
-        target: 'http:localhost:5000',
+      'backend/storage': {
+        target: 'http://localhost:5000',
         changeOrigin: true
       }
     }

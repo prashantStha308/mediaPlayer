@@ -1,7 +1,11 @@
+import Tile from "../components/Tile.jsx";
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <div>Home</div>
+      <Tile />
+    </div>
   )
 }
 

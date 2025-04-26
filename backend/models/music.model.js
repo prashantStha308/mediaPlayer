@@ -19,7 +19,7 @@ const musicSchema = mongoose.Schema({
     },
     description: {
         type: String,
-        default: ' '
+        default: 'No description available'
     }, 
     artists: [{
         type: String,

@@ -13,16 +13,20 @@ import fs from 'fs';
  * - `{ success: false, message: string }` on failure.
  * - `{ success: true, data: Object, message: string }` on success.
  */
-export const addMusic = async ( req , res ) => {
+export const uploadMusic = async ( req , res ) => {
     const body = req.body;
     const audio = req.file;
+    // convert file url
+    let fileUrl = audio.path.split('/');
+    fileUrl[0] = "http://localhost:5000";
+    fileUrl = fileUrl.join('/');
     // if title or audio file or audio file path doesn't exist, exist process.
     if( !body.title || !audio || !audio.path ){
         return res.status(400).json({ success: false , message: "Incomplete request. Required data/s missing" });
     }
     const newMusic = new Music({
         ...body,
-        url: audio.path
+        url: fileUrl
     });
     try {
         await newMusic.save();
@@ -77,7 +81,7 @@ export const getMusicById = async ( req , res ) => {
         }
         res.status(200).json({ success: true , data: target , message: "Found music" });
     } catch (error) {
-        return res.status(500).json({ success: false , message: error.message });
+        return res.status(500).json({ success: false , message: error.message || "Some unknown error occured" });
     }
 }
 

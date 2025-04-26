@@ -1,5 +1,5 @@
 import e from "express";
-import { addMusic, deleteMusic, getAllMusic, getMusicById, updateMusic } from "../controllers/music.controller.js";
+import { uploadMusic, deleteMusic, getAllMusic, getMusicById, updateMusic } from "../controllers/music.controller.js";
 import { musicUpload } from "../config/multerConfig.js";
 
 const musicRouter = e.Router();
@@ -10,7 +10,7 @@ musicRouter.get( '/' , getAllMusic );
 
 // api/music/
 // adds music to database
-musicRouter.post( '/' , musicUpload.single('audio') , addMusic );
+musicRouter.post( '/' , musicUpload.single('music') , uploadMusic );
 
 // api/music/:id
 // gets music of certain id

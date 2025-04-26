@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
-.list-element{
-    @apply text-xl text-blue-500
+body{
+    @apply bg-gray-800 text-white dark:bg-gray-800;
+}
+
+button{
+    @apply cursor-pointer;
+}
+
+.list-items{
+    @apply hover:text-purple-500 transition-all duration-100 ease-in-out;
 }
