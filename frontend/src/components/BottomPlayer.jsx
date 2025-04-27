@@ -1,9 +1,17 @@
+import { useEffect, useRef } from "react";
 import useMusicStore from "../store/music.store"
 import Player from "./Player"
 
 const BottomPlayer = () => {
 
-	const { currentTrack } = useMusicStore();
+	const { currentTrack , setAudioElementRef } = useMusicStore();
+	const audioRef = useRef(null);
+
+	useEffect( ()=>{
+		if( audioRef.current !== null ){
+			setAudioElementRef(audioRef);
+		}
+	} , [setAudioElementRef] );
 
 	return (
 		<section className=" px-2 py-3 mx-2 mb-1 bg-gray-900 rounded-md border border-gray-600 box-border flex justify-between items-center ">
@@ -26,6 +34,14 @@ const BottomPlayer = () => {
 				{/* player controls */}
 				controllers
 			</section>
+			{currentTrack &&
+				<div className=" absolute -bottom-10 opacity-0 -z-50">
+					<audio ref={audioRef} >
+						<source src={currentTrack.url} type="audio/mp3" />
+						Your browser does not support the audio element.
+					</audio>
+				</div>
+			}
 		</section>
 	)
 }

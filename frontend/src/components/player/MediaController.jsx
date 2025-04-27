@@ -16,14 +16,13 @@ const MediaController = () => {
 
         {/* play */}
         {isPlaying ?
-            <button className='bg-neutral-300 hover:bg-purple-500 hover:text-white transition-all duration-100 ease-out text-gray-900 rounded-full p-3' >
-                <Pause size={18} onClick={playPauseTrack} />
+            <button className='bg-neutral-300 hover:bg-purple-500 hover:text-white transition-all duration-100 ease-out text-gray-900 rounded-full p-3' onClick={playPauseTrack} >
+                <Pause size={18} />
             </button>
             :
-            <button className='bg-neutral-300 hover:bg-purple-500 hover:text-white transition-all duration-100 ease-out text-gray-900 rounded-full p-3' >
-                <Play size={18} onClick={playPauseTrack} />
+            <button className='bg-neutral-300 hover:bg-purple-500 hover:text-white transition-all duration-100 ease-out text-gray-900 rounded-full p-3' onClick={playPauseTrack} >
+                <Play size={18} />
             </button>
-
         }
 
         {/* play next track */}

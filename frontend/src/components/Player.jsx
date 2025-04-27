@@ -6,11 +6,12 @@ import { useEffect } from 'react';
 const Player = ({ track={} }) => {
     const { loadTrack } = useMusicControls();
 
+
     useEffect( ()=>{
         if( track._id ){
             loadTrack(track);
         }
-    } , [track] );
+    } , [ track ] );
 
   return (
     <section className="grid justify-center items-center gap-3" >
