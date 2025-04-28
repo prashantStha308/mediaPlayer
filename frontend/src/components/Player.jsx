@@ -8,10 +8,10 @@ const Player = ({ track={} }) => {
 
 
     useEffect( ()=>{
-        if( track._id ){
+        if( track && track._id ){
             loadTrack(track);
         }
-    } , [ track ] );
+    } , [ track._id ] );
 
   return (
     <section className="grid justify-center items-center gap-3" >

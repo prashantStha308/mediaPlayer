@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getMusicById } from "../services/music.services";
 import Player from "../components/Player";
 import useMusicStore from "../store/music.store";
+import { Star } from "lucide-react";
+import Loader from "../components/Loader.jsx"
 
 const PlayerPage = () => {
+
+    // playlist banayepaxi make this page independent on id
+
+
     const {id} = useParams();
+    const router = useNavigate();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -29,29 +36,38 @@ const PlayerPage = () => {
         fetchData();
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
+    if( id === null ){
+        if( currentTrack._id ){
+            router.push(`/player/${currentTrack._id}`);
+        }
+    }
+
+    if (loading) return <Loader /> ;
     if (error) return <div>Error: {error}</div>;
     if (!data) return <div>No music found</div>;
 
-    const isSameTrack = currentTrack && currentTrack._id === data._id;
-
     return (
-        <div>
-            <h2>Music Player</h2>
-            <div className="music-info">
-                <p>Title: {data.title}</p>
-                {data.artist && <p>Artist: {data.artist}</p>}
-                {data.album && <p>Album: {data.album}</p>}
+        <section className="grid justify-center h-full ">
+            <div className="grid items-center content-center ">
+                <div className="grid justify-center aspect-square">
+                    <img 
+                        src={currentTrack.imgUrl || "/defaultImg.svg"} 
+                        alt={currentTrack.title + "'s coverart"} 
+                        className="aspect-square object-cover w-xs border border-neutral-400 rounded-sm bg-neutral-200 " 
+                    />
+                    <div className="gird" >
+                        <div className="flex items-center justify-between " >
+                            <p className="text-left text-lg" >{ currentTrack.title || "Unknown Track" }</p>
+                            <button >
+                                <Star size={20} className="hover:fill-amber-500" />
+                            </button>
+                        </div>
+                        <span className="text-xs text-gray-300" > { currentTrack.artist || "Unknown Artist" } </span>
+                    </div>
+                </div>
+                <Player track={data} />
             </div>
-
-            <Player track={isSameTrack ? {} : data} />
-            
-            {/* For debugging */}
-            <div className="debug-info" style={{marginTop: '20px', fontSize: '12px', color: '#666'}}>
-                <p>Original URL: {data.url}</p>
-
-            </div>
-        </div>
+        </section>
     );
 }
 

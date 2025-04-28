@@ -34,14 +34,6 @@ const BottomPlayer = () => {
 				{/* player controls */}
 				controllers
 			</section>
-			{currentTrack &&
-				<div className=" absolute -bottom-10 opacity-0 -z-50">
-					<audio ref={audioRef} >
-						<source src={currentTrack.url} type="audio/mp3" />
-						Your browser does not support the audio element.
-					</audio>
-				</div>
-			}
 		</section>
 	)
 }

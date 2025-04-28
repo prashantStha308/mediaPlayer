@@ -34,6 +34,10 @@ const MusicControls = () => {
     }
 
     const loadTrack = async(track) => {
+        // Don't reload if it's the same track and already playing
+        if (currentTrack._id === track._id && audioElementRef?.current?.src === track.url) {
+            return;
+        }
         let targetTrack = playlist.find(item => item._id === track._id);
         if (!targetTrack) {
             // incase track not present in playlist, add it

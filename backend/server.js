@@ -30,6 +30,14 @@ app.use( 'api/playlist' , playlistRouter );
 app.use( '/storage/music/' , express.static( path.join( __dirname , 'storage/music' ) ) );
 app.use( '/storage/playlist' , express.static( path.join( __dirname , 'storage/playlist' ) ) );
 
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+    app.get( "*", (req,res)=>{
+        res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"));
+    } )
+}
+
 // listening to a PORT and starting the server
 app.listen(process.env.PORT, ()=>{
     console.log(`Server started at http://localhost:${process.env.PORT}`);
