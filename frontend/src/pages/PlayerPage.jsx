@@ -9,8 +9,6 @@ import Loader from "../components/Loader.jsx"
 const PlayerPage = () => {
 
     // playlist banayepaxi make this page independent on id
-
-
     const {id} = useParams();
     const router = useNavigate();
     const [data, setData] = useState(null);
@@ -20,6 +18,10 @@ const PlayerPage = () => {
 
     useEffect(() => {
         const fetchData = async() => {
+            if( id === undefined ){
+                console.log("Is null");
+                return
+            }
             try {
                 const res = await getMusicById(id);
                 if (!res.success) {
@@ -36,11 +38,16 @@ const PlayerPage = () => {
         fetchData();
     }, [id]);
 
-    if( id === null ){
-        if( currentTrack._id ){
-            router.push(`/`);
+    useEffect(() => {
+        if (id === undefined) {
+            if (currentTrack._id) {
+                router(`/player/${currentTrack._id}`);
+            } else {
+                setLoading(false);  // Stop loading if no id and no currentTrack
+            }
+            return;
         }
-    }
+    }, [id, currentTrack]);
 
     if (loading) return <Loader /> ;
     if (error) return <div>Error: {error}</div>;
@@ -51,7 +58,7 @@ const PlayerPage = () => {
             <div className="grid items-center content-center ">
                 <div className="grid justify-center aspect-square">
                     <img 
-                        src={currentTrack?.imgUrl || "/defaultImg.svg"} 
+                        src={currentTrack?.imageUrl || "/defaultImg.svg"} 
                         alt={currentTrack?.title + "'s coverart"} 
                         className="aspect-square object-cover w-xs border border-neutral-400 rounded-sm bg-neutral-200 " 
                     />

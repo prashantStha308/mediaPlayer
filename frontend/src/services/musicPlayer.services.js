@@ -10,14 +10,14 @@ const MusicControls = () => {
     const { playlist = [], setPlaylist } = usePlaylistStore();
 
     const playTrack = () => {
-        if (audioElementRef?.current && currentTrack.url) {
+        if (audioElementRef?.current && currentTrack.audioUrl) {
             audioElementRef.current.play();
             setIsPlaying(true);
         }
     }    
     
     const pauseTrack = () => {
-        if (audioElementRef?.current && currentTrack.url) {
+        if (audioElementRef?.current && currentTrack.audioUrl) {
             audioElementRef.current.pause();
             setIsPlaying(false);
         }
@@ -35,7 +35,7 @@ const MusicControls = () => {
 
     const loadTrack = async(track) => {
         // Don't reload if it's the same track and already playing
-        if (currentTrack._id === track._id && audioElementRef?.current?.src === track.url) {
+        if (currentTrack._id === track._id && audioElementRef?.current?.src === track.audioUrl) {
             return;
         }
         let targetTrack = playlist.find(item => item._id === track._id);
@@ -55,7 +55,7 @@ const MusicControls = () => {
         }
         resetPlayer();
         if (audioElementRef?.current) {
-            audioElementRef.current.src = track.url;
+            audioElementRef.current.src = track.audioUrl;
             audioElementRef.current.load();
             audioElementRef.current.addEventListener('ended', nextTrack);
         }

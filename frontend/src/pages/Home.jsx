@@ -1,14 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ListTile from "../components/tiles/ListTile.jsx";
 import {getAllMusic} from "../services/music.services.js";
 import usePlaylistStore from "../store/playlist.store.js";
+import Loader from "../components/Loader.jsx";
 
 const Home = () => {
 	const { playlist , loadPlaylist } = usePlaylistStore();
+	const [loading , setLoading ] = useState(false);
 
 	useEffect( ()=>{
 		const loadMusic = async()=>{
 			try {
+				setLoading(true);
 				const res = await getAllMusic();
 				if( !res.success ){
 					throw new Error(res.message);
@@ -16,11 +19,14 @@ const Home = () => {
 				loadPlaylist(res.data);
 			} catch (error) {
 				console.log(error.message);
+			}finally{
+				setLoading(false);
 			}
 		}
 		loadMusic();
 	}, [ loadPlaylist ] )
 
+	if( loading ) return <Loader />
 
 	return (
 		<section className="px-2" >

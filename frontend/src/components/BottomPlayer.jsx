@@ -19,7 +19,7 @@ const BottomPlayer = () => {
 			{/* Song details */}
 			<section className="flex items-center gap-4" >
 				<div className="bg-white rounded-xs p-2" >
-					<img src={ "/defaultImg.svg"} alt="musicImg" width={40} height={40} />
+					<img src={ currentTrack.imageUrl || "/defaultImg.svg"} alt={ currentTrack.title + "'s Cover art" } width={40} height={40} />
 				</div>
 				<div className="grid content-evenly gap-0" >
 					<span className=" p-0 m-0 text-left text-sm hover:underline cursor-pointer" > <Link to={ currentTrack._id ? `/player/${currentTrack._id}` : "/" } > { currentTrack.title || "Unknown Title"} </Link>  </span>

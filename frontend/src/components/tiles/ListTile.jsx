@@ -6,7 +6,7 @@ const ListTile = ({ track={} }) => {
 		<Link to={`/player/${track._id}`} >
 			<section className=" relative flex items-center justify-start gap-4 border border-gray-700 rounded-md px-4 py-2 max-w-xs overflow-hidden group" >
 				<div className="bg-white rounded-xs p-2 z-30 " >
-					<img src={ "/defaultImg.svg"} alt="musicImg" width={40} height={40} />
+					<img src={ track.imageUrl || "/defaultImg.svg"} alt="musicImg" width={40} height={40} />
 				</div>
 				<div className="grid content-evenly gap-0 z-30" >
 					<span className="text-left text-sm" > { track.title || "Unknown Title"} </span>

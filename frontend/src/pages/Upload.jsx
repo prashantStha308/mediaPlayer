@@ -9,8 +9,9 @@ const Upload = () => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        console.log("Submitting...")
         const formData = new FormData(e.target);
-        const audioFile = formData.get('music');
+        const audioFile = formData.get('audio');
         // remove the metadata of
         // create a clean blob
         const buffer = await audioFile.arrayBuffer();
@@ -19,17 +20,13 @@ const Upload = () => {
         // convert blob to file
         const cleanedFile = new File( [cleanedBlob] , audioFile.name , {type: audioFile.type} );
 
-        formData.set( "music" , cleanedFile );
+        formData.set( "audio" , cleanedFile );
         try {
             setLoading(true);
             const res = await uploadMusic(formData);
-            const data = res.data;
             if( !res.success ){
                 throw new Error(res.message);
             }
-            console.log( "Uploaded Data: " , data );
-            console.log( "URL: " , data.url );
-            console.log('Upload ID: ' , data._id);
             navigate(`/`);
         } catch (error) {
             console.log("Failed upload: " , error.message);
@@ -52,13 +49,21 @@ const Upload = () => {
                 <input type="text" name="title" className="p-2 rounded-sm border border-white" required />
             </div>
             <div className="flex">
+                <label htmlFor="title"> Artist: </label>
+                <input type="text" name="artist" className="p-2 rounded-sm border border-white" required />
+            </div>
+            <div className="flex">
                 <label htmlFor="musicDescription"> Description </label>
                 <textarea name="musicDescription" id="musicDescription" className="p-2 rounded-sm border border-white resize-none" ></textarea>
             </div>
 
             <div className="flex gap-0 items-center border border-white w-fit" >
-                <label htmlFor="music" className="bg-purple-500 rounded-md p-2 cursor-pointer" > Choose music </label>
-                <input type="file" name="music" id="music" accept="audio/*" required />
+                <label htmlFor="audio" className="bg-purple-500 rounded-md p-2 cursor-pointer" > Choose music </label>
+                <input type="file" name="audio" id="audio" accept="audio/*" required />
+            </div> 
+            <div className="flex gap-0 items-center border border-white w-fit" >
+                <label htmlFor="coverArt" className="bg-purple-500 rounded-md p-2 cursor-pointer" > Choose cover art </label>
+                <input type="file" name="coverArt" id="coverArt" accept="coverArt/*" />
             </div> 
             <button type="submit" className="bg-purple-500 rounded-md p-2 cursor-pointer"> Submit </button>
         </form>

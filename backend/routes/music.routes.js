@@ -10,7 +10,10 @@ musicRouter.get( '/' , getAllMusic );
 
 // api/music/
 // adds music to database
-musicRouter.post( '/' , musicUpload.single('music') , uploadMusic );
+musicRouter.post( '/' , musicUpload.fields([
+    { name: 'audio' , maxCount: 1 },
+    { name: 'coverArt' , maxCount: 1 }
+]) , uploadMusic );
 
 // api/music/:id
 // gets music of certain id

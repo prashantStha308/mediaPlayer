@@ -1,21 +1,10 @@
 import mongoose from "mongoose";
 
-/**
- * Describes how music's data is stored in MongoDB
- * @typedef {object} Music
- * 
- * @property {string} title - `Required: true`
- * @property {string} description - A short description of the music.
- * @property {string[]} artists - An array of artist names.
- * @property {string} album - The album name.
- * @property {number} duration - Takes time in seconds (e.g., 120).
- * @property {string[]} genre - The genre of the music.
- * @property {Date} timeCreated - The date the music entry was created.
- */
 const musicSchema = mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     description: {
         type: String,
@@ -23,25 +12,39 @@ const musicSchema = mongoose.Schema({
     }, 
     artists: [{
         type: String,
-        default: 'Unknown'
+        default: 'Unknown',
+        trim: true
     }],
     album: {
         type: String,
         default: 'Unknown'
     },
-    duration: {
-        type: Number,
-        default: 0
-    },
     genre: [{
         type: String
     }],
-    url:{
-        type: String
-    },
-    imgUrl:{
+    audioUrl:{
         type: String,
-        default: ""
+        required: true
+    },
+    audioPublicId:{
+        type: String,
+        required: true
+    },
+    imageUrl:{
+        type: String,
+        default: null
+    },
+    imagePublicId:{
+        type: String,
+        default: null
+    },
+    likes:{
+        type: Number,
+        default: 0
+    },
+    plays:{
+        type: Number,
+        default: 0
     },
     timeCreated: {
         type: Date,
@@ -49,10 +52,5 @@ const musicSchema = mongoose.Schema({
     }
 });
 
-/**
- * Model for Music
- * @type {import('mongoose').Model<Music>}
- */
 const Music = mongoose.model('Music', musicSchema);
-
 export default Music;

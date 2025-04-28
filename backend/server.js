@@ -29,8 +29,8 @@ app.use('/api/music', musicRouter);
 app.use('/api/playlist', playlistRouter);
 
 // serving static files (uploaded music and playlists)
-app.use('/storage/music', express.static(path.join(__dirname, 'backend', 'storage', 'music')));
-app.use('/storage/playlist', express.static(path.join(__dirname, 'backend', 'storage', 'playlist')));
+// app.use('/storage/music', express.static(path.join(__dirname, 'backend', 'storage', 'music')));
+// app.use('/storage/playlist', express.static(path.join(__dirname, 'backend', 'storage', 'playlist')));
 
 // production setup for serving frontend build
 if (process.env.NODE_ENV === 'production') {
