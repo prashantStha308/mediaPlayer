@@ -43,6 +43,7 @@ const MusicControls = () => {
             // incase track not present in playlist, add it
             setPlaylist([...playlist, track]);
         }
+        setIsPlaying(false);
     
         const targetIndex = playlist.findIndex(item => item._id === track._id);
         if (targetIndex !== -1) {

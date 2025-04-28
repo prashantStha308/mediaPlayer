@@ -38,7 +38,7 @@ const PlayerPage = () => {
 
     if( id === null ){
         if( currentTrack._id ){
-            router.push(`/player/${currentTrack._id}`);
+            router.push(`/`);
         }
     }
 
@@ -51,18 +51,18 @@ const PlayerPage = () => {
             <div className="grid items-center content-center ">
                 <div className="grid justify-center aspect-square">
                     <img 
-                        src={currentTrack.imgUrl || "/defaultImg.svg"} 
-                        alt={currentTrack.title + "'s coverart"} 
+                        src={currentTrack?.imgUrl || "/defaultImg.svg"} 
+                        alt={currentTrack?.title + "'s coverart"} 
                         className="aspect-square object-cover w-xs border border-neutral-400 rounded-sm bg-neutral-200 " 
                     />
                     <div className="gird" >
                         <div className="flex items-center justify-between " >
-                            <p className="text-left text-lg" >{ currentTrack.title || "Unknown Track" }</p>
+                            <p className="text-left text-lg" >{ currentTrack?.title || "Unknown Track" }</p>
                             <button >
                                 <Star size={20} className="hover:fill-amber-500" />
                             </button>
                         </div>
-                        <span className="text-xs text-gray-300" > { currentTrack.artist || "Unknown Artist" } </span>
+                        <span className="text-xs text-gray-300" > { currentTrack?.artist || "Unknown Artist" } </span>
                     </div>
                 </div>
                 <Player track={data} />

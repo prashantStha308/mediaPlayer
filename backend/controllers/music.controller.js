@@ -1,6 +1,12 @@
 import Music from '../models/music.model.js';
 import mongoose from 'mongoose';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 /**
  * Adds a new music entry to the database.
@@ -142,8 +148,14 @@ export const deleteMusic = async ( req , res ) => {
             return res.status(404).json({ success: false , message: "Music not Found" });
         }
 
+        // extract filename from URL
+        const filename = deletedMusic.url.split('/').pop();
+
+        // resolve the full local path
+        const localFilePath = path.join(__dirname, '..', 'storage', 'music', filename);
+
         // delete the audio file 
-        fs.unlink( deletedMusic.url , err => {
+        fs.unlink( localFilePath, err => {
             if( err ){
                 console.error(`Error deleting file: ${deletedMusic.url.split('/').pop()}. With error: `, err );
             }else{

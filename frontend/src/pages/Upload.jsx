@@ -25,7 +25,8 @@ const Upload = () => {
             }
             console.log( "Uploaded Data: " , data );
             console.log( "URL: " , data.url );
-            navigate(`/player/${res.data._id}`);
+            console.log('Upload ID: ' , data._id);
+            navigate(`/`);
         } catch (error) {
             console.log("Failed upload: " , error.message);
             return;

@@ -9,8 +9,6 @@ import AudioElement from "./lib/AudioElement.jsx";
 function AppContent() {
 	const location = useLocation();
     const isPlayerPage = location.pathname.startsWith('/player');
-    console.log("Current path:", location.pathname);
-    console.log("Is player page:", isPlayerPage);
 
 	return(
         <MusicQueryProvider>

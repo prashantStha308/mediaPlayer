@@ -70,8 +70,8 @@ const Navbar = () => {
 								{navlinks}
 							</ul>
 						</div>
-						<Link to={"/upload"} className="bg-purple-600 py-1 px-2 rounded-md cursor-pointer hover:bg-purple-700 transition-all duration-150 ease-out text-center " >
-							<button>
+						<Link to={"/upload"} className="bg-purple-600 py-1 px-2 rounded-md cursor-pointer hover:bg-purple-700 transition-all duration-150 ease-out text-center grid justify-center items-center" >
+							<button className="grid justify-center items-center" >
 								Upload
 							</button>
 						</Link>
