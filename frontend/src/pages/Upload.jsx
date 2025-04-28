@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { uploadMusic } from "../services/music.services";
+import { useState } from "react";
+import Loader from "../components/Loader.jsx"
 
 const Upload = () => {
     const navigate = useNavigate();
+    const [ loading , setLoading ] = useState(false);
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -18,6 +21,7 @@ const Upload = () => {
 
         formData.set( "music" , cleanedFile );
         try {
+            setLoading(true);
             const res = await uploadMusic(formData);
             const data = res.data;
             if( !res.success ){
@@ -30,9 +34,13 @@ const Upload = () => {
         } catch (error) {
             console.log("Failed upload: " , error.message);
             return;
+        }finally{
+            setLoading(false);
         }
 
     }
+
+    if(loading) return <Loader />;
 
   return (
     <section id="upload" >
