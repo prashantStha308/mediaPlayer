@@ -9,7 +9,6 @@ const Upload = () => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        console.log("Submitting...")
         const formData = new FormData(e.target);
         const audioFile = formData.get('audio');
         // remove the metadata of
@@ -19,8 +18,11 @@ const Upload = () => {
 
         // convert blob to file
         const cleanedFile = new File( [cleanedBlob] , audioFile.name , {type: audioFile.type} );
-
         formData.set( "audio" , cleanedFile );
+
+        const artistsArr = formData.get('artist').split(',').map(item=>item.trim());
+        formData.set('artist',JSON.stringify(artistsArr));
+
         try {
             setLoading(true);
             const res = await uploadMusic(formData);
@@ -51,6 +53,8 @@ const Upload = () => {
             <div className="flex">
                 <label htmlFor="title"> Artist: </label>
                 <input type="text" name="artist" className="p-2 rounded-sm border border-white" required />
+                <br />
+                <span> Artists are seperated by comma(,) </span>
             </div>
             <div className="flex">
                 <label htmlFor="musicDescription"> Description </label>
@@ -63,7 +67,7 @@ const Upload = () => {
             </div> 
             <div className="flex gap-0 items-center border border-white w-fit" >
                 <label htmlFor="coverArt" className="bg-purple-500 rounded-md p-2 cursor-pointer" > Choose cover art </label>
-                <input type="file" name="coverArt" id="coverArt" accept="coverArt/*" />
+                <input type="file" name="coverArt" id="coverArt" accept="image/*" />
             </div> 
             <button type="submit" className="bg-purple-500 rounded-md p-2 cursor-pointer"> Submit </button>
         </form>

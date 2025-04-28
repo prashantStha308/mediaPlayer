@@ -44,6 +44,11 @@ export const getMusicById = async (mId) => {
 // Upload music
 export const uploadMusic = async (newPost) => {
     try {
+
+        for( let [key,value] of newPost ){
+            console.log(`${key}: ${value}`);
+        }
+
         if (!newPost.get("title") || !newPost.get('artist') ) {
             throw new Error("Required Fields not present");
         }

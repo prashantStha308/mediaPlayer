@@ -36,6 +36,7 @@ const PlayerPage = () => {
         }
 
         fetchData();
+        
     }, [id]);
 
     useEffect(() => {
@@ -48,6 +49,7 @@ const PlayerPage = () => {
             return;
         }
     }, [id, currentTrack]);
+    console.log(currentTrack);
 
     if (loading) return <Loader /> ;
     if (error) return <div>Error: {error}</div>;
@@ -62,14 +64,23 @@ const PlayerPage = () => {
                         alt={currentTrack?.title + "'s coverart"} 
                         className="aspect-square object-cover w-xs border border-neutral-400 rounded-sm bg-neutral-200 " 
                     />
-                    <div className="gird" >
+                    <div className="grid" >
                         <div className="flex items-center justify-between " >
                             <p className="text-left text-lg" >{ currentTrack?.title || "Unknown Track" }</p>
                             <button >
                                 <Star size={20} className="hover:fill-amber-500" />
                             </button>
                         </div>
-                        <span className="text-xs text-gray-300" > { currentTrack?.artist || "Unknown Artist" } </span>
+                        <span className="text-xs text-gray-300">
+                            {currentTrack?.artists && currentTrack.artists.length > 0 
+                            ? currentTrack.artists.map((item, index) => (
+                                    <span key={index}>
+                                    {item}{index !== currentTrack.artists.length - 1 && ', '}
+                                    </span>
+                                )) 
+                            : "Unknown Artist"
+                            }
+                        </span>
                     </div>
                 </div>
                 <Player track={data} />

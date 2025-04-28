@@ -10,7 +10,11 @@ const ListTile = ({ track={} }) => {
 				</div>
 				<div className="grid content-evenly gap-0 z-30" >
 					<span className="text-left text-sm" > { track.title || "Unknown Title"} </span>
-					<span className="text-xs text-left" > { track.artist || "Unknown Artist"} </span>
+					<span className="p-0 m-0 text-xs text-left hover:underline cursor-pointer">
+						{track.artists && track.artists.length > 0
+							? track.artists.slice(0, 3).join(', ') + "..."
+							: "Unknown Artist"}
+					</span>
 				</div>
 
 				{/* decorations */}

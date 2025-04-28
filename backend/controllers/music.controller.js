@@ -1,12 +1,8 @@
 import Music from '../models/music.model.js';
 import mongoose from 'mongoose';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { uploadToCloudinary , deleteFromCloudinary } from '../services/cloudinary.services.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dww0antkw/image/upload/v1745858916/defaultImg_g8yd1y.svg";
 const DEFAULT_IMAGE_PUBLIC_ID = "defaultImg_g8yd1y";
@@ -15,10 +11,11 @@ const DEFAULT_IMAGE_PUBLIC_ID = "defaultImg_g8yd1y";
 // Upload music 
 export const uploadMusic = async (req, res) => {
     try {
-        const { title, description, artist, album, genre } = req.body;
-        
+        const { title, description, album, genre } = req.body;
+        const artists = JSON.parse(req.body.artist);
+        console.log(req.body);
         // Validate request
-        if (!title || !artist) {
+        if (!title || !artists) {
             return res.status(400).json({
                 success: false,
                 message: "Title and artist are required"
@@ -60,7 +57,7 @@ export const uploadMusic = async (req, res) => {
         const music = new Music({
             title,
             description,
-            artist,
+            artists,
             album,
             genre: genre || "Unknown",
             audioUrl: audioResult.secure_url,

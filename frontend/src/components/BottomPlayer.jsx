@@ -23,7 +23,11 @@ const BottomPlayer = () => {
 				</div>
 				<div className="grid content-evenly gap-0" >
 					<span className=" p-0 m-0 text-left text-sm hover:underline cursor-pointer" > <Link to={ currentTrack._id ? `/player/${currentTrack._id}` : "/" } > { currentTrack.title || "Unknown Title"} </Link>  </span>
-					<span className=" p-0 m-0 text-xs text-left hover:underline cursor-pointer" > { currentTrack.artist || "Unknown Artist"} </span>
+					<span className="p-0 m-0 text-xs text-left hover:underline cursor-pointer">
+						{currentTrack.artists && currentTrack.artists.length > 0
+							? currentTrack.artists.slice(0, 2).join(', ') + "..."
+							: "Unknown Artist"}
+					</span>
 				</div>
 			</section>
 
