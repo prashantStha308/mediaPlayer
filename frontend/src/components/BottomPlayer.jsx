@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import useMusicStore from "../store/music.store"
 import Player from "./Player"
+import { Link } from "react-router-dom";
 
 const BottomPlayer = () => {
 
@@ -21,8 +22,8 @@ const BottomPlayer = () => {
 					<img src={ "/defaultImg.svg"} alt="musicImg" width={40} height={40} />
 				</div>
 				<div className="grid content-evenly gap-0" >
-					<span className=" p-0 m-0 text-left text-sm" > { currentTrack.title || "Unknown Title"} </span>
-					<span className=" p-0 m-0 text-xs text-left" > { currentTrack.artist || "Unknown Artist"} </span>
+					<span className=" p-0 m-0 text-left text-sm hover:underline cursor-pointer" > <Link to={ currentTrack._id ? `/player/${currentTrack._id}` : "/" } > { currentTrack.title || "Unknown Title"} </Link>  </span>
+					<span className=" p-0 m-0 text-xs text-left hover:underline cursor-pointer" > { currentTrack.artist || "Unknown Artist"} </span>
 				</div>
 			</section>
 
