@@ -1,5 +1,4 @@
 import express from 'express';
-import { config } from 'dotenv';
 import { connectDB } from './config/db.js';
 import musicRouter from './routes/music.routes.js';
 import playlistRouter from './routes/playlist.routes.js';
@@ -7,13 +6,11 @@ import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 
-// configuring dotenv
-config();
 const app = express();
 
 // resolving correct path
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.resolve(path.dirname(__filename), '..');  // <-- corrected to point to project root
+const __dirname = path.resolve(path.dirname(__filename), '..'); 
 
 // middleware for JSON parsing
 app.use(express.json());
@@ -28,9 +25,6 @@ app.use(cors(corsOptions));
 app.use('/api/music', musicRouter);
 app.use('/api/playlist', playlistRouter);
 
-// serving static files (uploaded music and playlists)
-// app.use('/storage/music', express.static(path.join(__dirname, 'backend', 'storage', 'music')));
-// app.use('/storage/playlist', express.static(path.join(__dirname, 'backend', 'storage', 'playlist')));
 
 // production setup for serving frontend build
 if (process.env.NODE_ENV === 'production') {

@@ -1,7 +1,5 @@
 import Music from '../models/music.model.js';
 import mongoose from 'mongoose';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { uploadToCloudinary , deleteFromCloudinary } from '../services/cloudinary.services.js';
 
 const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dww0antkw/image/upload/v1745858916/defaultImg_g8yd1y.svg";
